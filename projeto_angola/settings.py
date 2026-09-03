@@ -15,16 +15,14 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',  # ✅ Para estilos do painel
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'crispy_forms',
-    'crispy_bootstrap5',
     'core',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ ESTILOS DO PAINEL
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -72,7 +70,6 @@ TIME_ZONE = 'Africa/Luanda'
 USE_I18N = True
 USE_TZ = True
 
-# ✅ ESTILOS — FAZ APARECER AS CORES NO PAINEL!
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
