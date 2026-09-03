@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Servico, Contato
 
 def home(request):
@@ -9,8 +9,8 @@ def sobre(request):
     return render(request, 'core/sobre.html')
 
 def servicos(request):
-    servicos = Servico.objects.filter(ativo=True).order_by('ordem')
-    return render(request, 'core/servicos.html', {'servicos': servicos})
+    lista = Servico.objects.filter(ativo=True).order_by('ordem')
+    return render(request, 'core/servicos.html', {'servicos': lista})
 
 def contato(request):
     if request.method == 'POST':

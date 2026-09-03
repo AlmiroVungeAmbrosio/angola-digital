@@ -1,72 +1,65 @@
 {% extends 'core/base.html' %}
-
 {% block content %}
-
-<!-- Hero Section -->
 <section class="bg-primary text-white py-5">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6">
-                <h1 class="display-4 fw-bold">Conectando Angola ao Futuro</h1>
-                <p class="lead mb-4">Soluções digitais para empresas angolanas — Sites, Aplicativos e Presença Online</p>
-                <a href="/servicos" class="btn btn-light btn-lg">Nossos Serviços</a>
+        <div class="row align-items-center min-vh-75">
+            <div class="col-md-6 py-5">
+                <h1 class="display-4 fw-bold mb-4">Conectando Angola ao Futuro</h1>
+                <p class="lead mb-4">Soluções digitais profissionais para impulsionar o seu negócio. Sites, Aplicações e Presença Online.</p>
+                <a href="/servicos/" class="btn btn-light btn-lg px-5">Ver Preços</a>
             </div>
             <div class="col-md-6 text-center">
-                <h2 style="font-size: 150px;">🇦🇴</h2>
+                <span style="font-size: 180px;">🇦🇴</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Serviços e Preços -->
-<div class="container py-5">
-    <h2 class="text-center mb-5">Nossos Serviços & Preços</h2>
-    <div class="row g-4">
-        {% for servico in servicos %}
-        <div class="col-md-4">
-            <div class="card h-100 text-center p-4">
-                <h3 class="card-title">{{ servico.nome }}</h3>
-                <p class="display-4 fw-bold text-primary">{{ servico.preco }} Kz</p>
-                <p class="text-muted mb-3">{{ servico.descricao_curta }}</p>
-                <ul class="list-unstyled text-start">
-                    {% for linha in servico.descricao_completa|linebreaksbr %}
-                    <li>{{ linha }}</li>
-                    {% endfor %}
-                </ul>
-                <a href="https://wa.me/2449XXXXXXXX?text=Quero%20contratar%20{{ servico.nome|urlencode }}" 
-                   class="btn btn-success mt-auto" target="_blank">
-                    📲 Pedir Orçamento
-                </a>
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 display-6">Nossos Serviços & Preços</h2>
+        <div class="row g-4">
+            {% for s in servicos %}
+            <div class="col-md-4">
+                <div class="card h-100 p-4 text-center">
+                    <h3 class="card-title fw-bold">{{ s.nome }}</h3>
+                    <p class="display-5 fw-bold text-primary my-3">{{ s.preco }} Kz</p>
+                    <p class="text-muted mb-3">{{ s.descricao_curta }}</p>
+                    <ul class="text-start text-decoration-none mb-4">
+                        {% for linha in s.descricao_completa|linebreaksbr %}
+                        <li class="mb-1">{{ linha }}</li>
+                        {% endfor %}
+                    </ul>
+                    <a href="https://wa.me/2449XXXXXXXX?text=Quero%20contratar%20{{ s.nome|urlencode }}" class="btn btn-success w-100 mt-auto">📲 Pedir Orçamento</a>
+                </div>
             </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <p class="text-muted fs-5">Nenhum serviço cadastrado ainda. Volte em breve!</p>
+            </div>
+            {% endfor %}
         </div>
-        {% empty %}
-        <div class="col-12 text-center py-5">
-            <p class="text-muted fs-5">Nenhum serviço cadastrado ainda. Volte em breve!</p>
-        </div>
-        {% endfor %}
     </div>
-</div>
+</section>
 
-<!-- Sobre Nós -->
 <section class="bg-light py-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h2>Sobre Nós</h2>
+            <div class="col-md-6 mb-4">
+                <h2 class="fw-bold mb-3">Sobre Nós</h2>
                 <p class="lead">Somos uma empresa angolana dedicada a transformar negócios através da tecnologia.</p>
                 <p>Ajudamos pequenos e grandes empresas a estarem presentes na internet, a vender mais e a crescer com soluções digitais acessíveis e de qualidade.</p>
             </div>
             <div class="col-md-6">
-                <h3>O que fazemos</h3>
-                <ul class="list-unstyled fs-5">
-                    <li>✅ Criação de Sites Profissionais</li>
-                    <li>✅ Lojas Online (E-commerce)</li>
-                    <li>✅ Aplicações Web e Móveis</li>
+                <h3 class="fw-bold mb-3">O que fazemos</h3>
+                <ul class="fs-5">
+                    <li class="mb-2">✅ Criação de Sites Profissionais</li>
+                    <li class="mb-2">✅ Lojas Online (E-commerce)</li>
+                    <li class="mb-2">✅ Aplicações Web e Móveis</li>
                     <li>✅ Gestão de Redes Sociais</li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
-
 {% endblock %}
