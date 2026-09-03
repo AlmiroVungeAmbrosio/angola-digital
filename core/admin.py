@@ -3,7 +3,7 @@ from .models import Contato, Servico
 
 @admin.register(Contato)
 class ContatoAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email', 'telefone', 'mensagem', 'data_envio')
+    list_display = ('nome', 'email', 'telefone', 'data_envio')
     search_fields = ('nome', 'email')
     list_filter = ('data_envio',)
 

@@ -1,89 +1,72 @@
-<!DOCTYPE html>
-<html lang="pt-ao">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angola Digital</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    {% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">🇦🇴 Angola Digital</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/sobre/">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/servicos/">Serviços</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/contato/">Contato</a></li>
-                </ul>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold">Conectando Angola ao Futuro</h1>
+                <p class="lead mb-4">Soluções digitais para empresas angolanas — Sites, Aplicativos e Presença Online</p>
+                <a href="/servicos" class="btn btn-light btn-lg">Nossos Serviços</a>
+            </div>
+            <div class="col-md-6 text-center">
+                <h2 style="font-size: 150px;">🇦🇴</h2>
             </div>
         </div>
-    </nav>
-
-    <div class="bg-primary text-white py-5 text-center">
-        <h1>Conectando Angola ao Futuro 🇦🇴</h1>
-        <p class="lead">Soluções digitais para empresas angolanas</p>
-        <a href="/servicos/" class="btn btn-light btn-lg mt-3">Nossos Serviços</a>
     </div>
+</section>
 
-    <div class="container py-5">
-        <h2 class="text-center mb-5">Nossos Serviços & Preços</h2>
+<!-- Serviços e Preços -->
+<div class="container py-5">
+    <h2 class="text-center mb-5">Nossos Serviços & Preços</h2>
     <div class="row g-4">
+        {% for servico in servicos %}
         <div class="col-md-4">
             <div class="card h-100 text-center p-4">
-                <h3 class="card-title">🌐 Site Básico</h3>
-                <p class="display-4 fw-bold text-primary">15.000 Kz</p>
-                <p class="text-muted mb-3">Site simples e profissional</p>
+                <h3 class="card-title">{{ servico.nome }}</h3>
+                <p class="display-4 fw-bold text-primary">{{ servico.preco }} Kz</p>
+                <p class="text-muted mb-3">{{ servico.descricao_curta }}</p>
                 <ul class="list-unstyled text-start">
-                    <li>✅ 4 Páginas</li>
-                    <li>✅ Design responsivo</li>
-                    <li>✅ Formulário de contato</li>
-                    <li>✅ 1 ano de domínio .co.ao</li>
+                    {% for linha in servico.descricao_completa|linebreaksbr %}
+                    <li>{{ linha }}</li>
+                    {% endfor %}
                 </ul>
-                <a href="/contato/" class="btn btn-primary w-100 mt-auto">Solicitar Orçamento</a>
+                <a href="https://wa.me/2449XXXXXXXX?text=Quero%20contratar%20{{ servico.nome|urlencode }}" 
+                   class="btn btn-success mt-auto" target="_blank">
+                    📲 Pedir Orçamento
+                </a>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card h-100 text-center p-4 border-3 border-primary">
-                <span class="badge bg-primary position-absolute top-0 start-50 translate-middle">MAIS POPULAR</span>
-                <h3 class="card-title mt-3">🚀 Site Profissional</h3>
-                <p class="display-4 fw-bold text-primary">35.000 Kz</p>
-                <p class="text-muted mb-3">Completo e dinâmico</p>
-                <ul class="list-unstyled text-start">
-                    <li>✅ 8 Páginas</li>
-                    <li>✅ Painel de administração</li>
-                    <li>✅ Galeria de imagens</li>
-                    <li>✅ SEO — Aparece no Google</li>
-                    <li>✅ 1 ano de domínio + hospedagem</li>
-                </ul>
-                <a href="/contato/" class="btn btn-primary w-100 mt-auto">Solicitar Orçamento</a>
-            </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p class="text-muted fs-5">Nenhum serviço cadastrado ainda. Volte em breve!</p>
         </div>
-        <div class="col-md-4">
-            <div class="card h-100 text-center p-4">
-                <h3 class="card-title">📲 Aplicação Web</h3>
-                <p class="display-4 fw-bold text-primary">Desde 80.000 Kz</p>
-                <p class="text-muted mb-3">Sistema personalizado</p>
-                <ul class="list-unstyled text-start">
-                    <li>✅ Sistema à medida</li>
-                    <li>✅ Gestão de utilizadores</li>
-                    <li>✅ Base de dados segura</li>
-                    <li>✅ Relatórios e estatísticas</li>
-                    <li>✅ Manutenção incluso (3 meses)</li>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Sobre Nós -->
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Sobre Nós</h2>
+                <p class="lead">Somos uma empresa angolana dedicada a transformar negócios através da tecnologia.</p>
+                <p>Ajudamos pequenos e grandes empresas a estarem presentes na internet, a vender mais e a crescer com soluções digitais acessíveis e de qualidade.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>O que fazemos</h3>
+                <ul class="list-unstyled fs-5">
+                    <li>✅ Criação de Sites Profissionais</li>
+                    <li>✅ Lojas Online (E-commerce)</li>
+                    <li>✅ Aplicações Web e Móveis</li>
+                    <li>✅ Gestão de Redes Sociais</li>
                 </ul>
-                <a href="/contato/" class="btn btn-primary w-100 mt-auto">Falar Connosco</a>
             </div>
         </div>
     </div>
+</section>
 
-    </div>
-
-    <footer class="bg-dark text-white py-3 text-center">
-        <p>© 2026 Angola Digital — Luanda, Angola</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+{% endblock %}
